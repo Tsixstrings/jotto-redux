@@ -17,7 +17,7 @@ const setup = (state = {}) => {
   return wrapper;
 };
 
-describe.only("App FUNCTIONAL TESTS", () => {
+describe.skip("App FUNCTIONAL TESTS", () => {
   describe("no words guessed", () => {
     let wrapper;
     beforeEach(() => {

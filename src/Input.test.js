@@ -15,7 +15,7 @@ const setup = (success = false, secretWord = "party") => {
   return shallow(<Input success={success} secretWord={secretWord} />);
 };
 
-describe.skip("Tests for Guess Input", () => {
+describe("Tests for Guess Input", () => {
   describe("Input Field Renders", () => {
     describe("Success is true", () => {
       let wrapper;

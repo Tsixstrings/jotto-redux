@@ -1,5 +1,7 @@
 import { mount } from "enzyme";
-import { findByTestAttr } from "../test/testUtils";
+import { Provider } from "react-redux";
+
+import { findByTestAttr, storeFactory } from "../test/testUtils";
 import App from "./App";
 
 //activate global mock to make sure getSecretWord doesn't make network call
@@ -8,8 +10,13 @@ import { EXPORTDECLARATION_TYPES } from "@babel/types";
 jest.mock("./actions");
 
 const setup = () => {
+  const store = storeFactory();
   //use mount because useEffect is not called on "shallow" mode
-  return mount(<App />);
+  return mount(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
 };
 
 test("renders without error", () => {
@@ -34,7 +41,7 @@ describe("get secret word", () => {
     mockGetSecretWord.mockClear();
 
     //using setProps because wrapper.update() does not trigtger useEffect
-    wrapper.setProps()
+    wrapper.setProps();
 
     expect(mockGetSecretWord).toHaveBeenCalledTimes(0);
   });

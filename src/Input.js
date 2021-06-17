@@ -1,14 +1,23 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
-const Input = ({ success, secretWord }) => {
+const Input = ({ secretWord }) => {
   const [currentGuess, setCurrentGuess] = React.useState("");
+  const success = useSelector((state) => state.success);
 
   if (success) {
     return <div data-test="component-input" />;
   }
 
   return (
-    <div data-test="component-input" style={{display:"flex", alignItems: "center", justifyContent: "center"}}>
+    <div
+      data-test="component-input"
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <form className="form-inline">
         <input
           data-test="input-box"

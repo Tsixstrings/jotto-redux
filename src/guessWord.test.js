@@ -1,12 +1,22 @@
 //FUNCTIONAL TESTS
 import React from "react";
 import { mount } from "enzyme";
+import { Provider } from "react-redux";
 
 import App from "./App";
-import { findByTestAttr } from "../test/testUtils";
+import { findByTestAttr, storeFactory } from "../test/testUtils";
 
-const setup = (state = {}) => {
-  const wrapper = mount(<App />);
+// activate global mock to make sure getSecretWord doesn't make network call
+jest.mock("./actions");
+
+const setup = (initialState = {}) => {
+  const store = storeFactory(initialState);
+
+  const wrapper = mount(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
 
   //add a value to input box
   const inputBox = findByTestAttr(wrapper, "input-box");
@@ -17,7 +27,7 @@ const setup = (state = {}) => {
   return wrapper;
 };
 
-describe.skip("App FUNCTIONAL TESTS", () => {
+describe("App FUNCTIONAL TESTS", () => {
   describe("no words guessed", () => {
     let wrapper;
     beforeEach(() => {

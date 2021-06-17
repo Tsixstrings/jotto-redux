@@ -6,7 +6,6 @@ import App from "./App";
 
 //activate global mock to make sure getSecretWord doesn't make network call
 import { getSecretWord as mockGetSecretWord } from "./actions";
-import { EXPORTDECLARATION_TYPES } from "@babel/types";
 jest.mock("./actions");
 
 const setup = () => {
